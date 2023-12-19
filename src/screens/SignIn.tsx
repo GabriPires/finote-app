@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native'
 export function SignInScreen() {
   return (
     <View className="flex-1 items-center justify-center">
-      <Text>Vamos começar?</Text>
+      <Text className="font-poppins-bold">Vamos começar?</Text>
 
       <TouchableOpacity>
         <GoogleLogo />
