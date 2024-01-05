@@ -1,3 +1,4 @@
+import { Button } from '@components/Button'
 import { GoogleLogo } from 'phosphor-react-native'
 import { Text, TouchableOpacity, View } from 'react-native'
 
@@ -9,6 +10,7 @@ export function SignInScreen() {
       <TouchableOpacity>
         <GoogleLogo />
         <Text>Entrar com o Google</Text>
+        <Button title="Entrar com o Google" />
       </TouchableOpacity>
     </View>
   )

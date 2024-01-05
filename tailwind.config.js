@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'poppins-sans': ['Poppins_400Regular'],
+        'poppins-medium': ['Poppins_500Medium'],
         'poppins-bold': ['Poppins_700Bold'],
       },
     },
