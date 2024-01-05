@@ -17,7 +17,7 @@ export function IconButton({
   return (
     <TouchableOpacity
       className={twMerge(
-        'flex h-14 w-14 items-center justify-center rounded-md',
+        'flex h-12 w-12 items-center justify-center rounded-md',
         className,
       )}
       activeOpacity={0.4}
