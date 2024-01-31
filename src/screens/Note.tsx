@@ -1,5 +1,4 @@
 import { EntryListItem } from '@components/EntryListItem'
-import { TypeIcon } from '@components/EntryListItem/TypeIcon'
 import { Header } from '@components/Header'
 import { useRoute } from '@react-navigation/native'
 import { FlatList, Text, View } from 'react-native'

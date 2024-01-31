@@ -14,7 +14,8 @@
       "@types/*": ["./src/types/*"],
       "@services/*": ["./src/services/*"],
       "@theme/*": ["./src/theme/*"],
-      "@config/*": ["./src/config/*"]
+      "@config/*": ["./src/config/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   }
 }

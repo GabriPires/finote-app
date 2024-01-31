@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'poppins-sans': ['Poppins_400Regular'],
+        sans: ['Poppins_400Regular', 'sans-serif'],
+        'poppins-sans': ['Poppins_400Regular', 'sans-serif'],
         'poppins-medium': ['Poppins_500Medium'],
         'poppins-bold': ['Poppins_700Bold'],
       },
