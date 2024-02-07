@@ -2,7 +2,7 @@ import { SignOut } from 'phosphor-react-native'
 import { Image, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { IconButton } from './IconButton'
+import { IconButton } from './icon-button'
 
 export function Header() {
   const insets = useSafeAreaInsets()

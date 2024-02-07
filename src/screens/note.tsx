@@ -1,5 +1,5 @@
-import { EntryListItem } from '@components/EntryListItem'
-import { Header } from '@components/Header'
+import { EntryListItem } from '@components/entry-list-item'
+import { Header } from '@components/header'
 import { useRoute } from '@react-navigation/native'
 import { FlatList, Text, View } from 'react-native'
 

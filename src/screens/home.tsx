@@ -1,6 +1,6 @@
-import { Header } from '@components/Header'
-import { IconButton } from '@components/IconButton'
-import { NoteListItem } from '@components/NoteListItem'
+import { Header } from '@components/header'
+import { IconButton } from '@components/icon-button'
+import { NoteListItem } from '@components/note-list-item'
 import { PlusCircle } from 'phosphor-react-native'
 import { FlatList, Text, View } from 'react-native'
 
