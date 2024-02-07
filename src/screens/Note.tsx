@@ -35,17 +35,11 @@ export function NoteScreen() {
       <Header />
 
       <View className="flex-1 flex-col p-4">
-        <Text
-          className="font-poppins-medium text-2xl text-zinc-50"
-          numberOfLines={3}
-        >
+        <Text className="font-subtitle text-2xl text-zinc-50" numberOfLines={3}>
           Nota exemplo
         </Text>
 
-        <Text
-          className="mt-2 font-poppins-sans text-zinc-300"
-          numberOfLines={6}
-        >
+        <Text className="font-body mt-2 text-zinc-300" numberOfLines={6}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, quia
           nesciunt, eveniet similique laboriosam esse quibusdam laborum velit
           iure voluptate neque ipsum dolorem inventore fuga consequuntur?

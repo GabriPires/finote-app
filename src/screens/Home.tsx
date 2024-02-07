@@ -11,7 +11,7 @@ export function HomeScreen() {
 
       <View className="flex-1 flex-col p-4">
         <View className="flex-row items-center justify-between">
-          <Text className="font-poppins-medium text-2xl text-zinc-50">
+          <Text className="font-subtitle text-2xl text-zinc-50">
             Suas últimas notas
           </Text>
 

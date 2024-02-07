@@ -10,7 +10,7 @@ interface EntryListItemProps {
 }
 
 const entryValue = tv({
-  base: 'ml-auto font-poppins-sans leading-tight',
+  base: 'ml-auto font-body leading-tight',
   variants: {
     type: {
       income: 'text-green-500',
@@ -23,7 +23,7 @@ export function EntryListItem({ item }: EntryListItemProps) {
   return (
     <View className="flex-row items-center rounded-md bg-zinc-800 p-2">
       <Text
-        className="mr-2 font-poppins-sans leading-tight text-zinc-50"
+        className="font-body mr-2 leading-tight text-zinc-50"
         numberOfLines={1}
       >
         {item.title}

@@ -67,7 +67,7 @@ export function SignInScreen() {
       }}
     >
       <KeyboardAvoidingView className="my-auto p-8">
-        <Text className="mb-4 font-poppins-medium text-4xl text-zinc-50">
+        <Text className="font-subtitle mb-4 text-4xl text-zinc-50">
           Acessar
         </Text>
 
@@ -91,6 +91,8 @@ export function SignInScreen() {
           <FormErrorMessage message={errors.email?.message} />
         </FormControl>
 
+        <View className="h-4" />
+
         <FormControl label="Senha">
           <Controller
             control={control}
@@ -108,19 +110,17 @@ export function SignInScreen() {
         </FormControl>
 
         <Button className="mt-4" onPress={handleSubmit(handleSignIn)}>
-          <Text className="font-poppins-medium text-lg text-zinc-50">
-            Entrar
-          </Text>
+          <Text className="font-subtitle text-lg text-zinc-50">Entrar</Text>
         </Button>
 
         <View className="mt-4 flex-row justify-between">
           <TouchableOpacity>
-            <Text className="font-poppins-medium text-sm text-zinc-50">
+            <Text className="font-subtitle text-sm text-zinc-50">
               Esqueci minha senha
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleSignUp}>
-            <Text className="font-poppins-medium text-sm text-zinc-50">
+            <Text className="font-subtitle text-sm text-zinc-50">
               Criar uma conta
             </Text>
           </TouchableOpacity>

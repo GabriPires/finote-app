@@ -80,7 +80,7 @@ export function SignUpScreen() {
       }}
     >
       <KeyboardAvoidingView className="my-auto p-8">
-        <Text className="mb-4 font-poppins-medium text-4xl text-zinc-50">
+        <Text className="font-subtitle mb-4 text-4xl text-zinc-50">
           Criar uma conta
         </Text>
 
@@ -121,13 +121,13 @@ export function SignUpScreen() {
         </FormControl>
 
         <Button className="mt-4" onPress={handleSubmit(handleSignUp)}>
-          <Text className="font-poppins-medium text-lg text-zinc-50">
+          <Text className="font-subtitle text-lg text-zinc-50">
             Criar conta
           </Text>
         </Button>
 
         <TouchableOpacity className="mt-4" onPress={handleSignIn}>
-          <Text className="font-poppins-medium text-sm text-zinc-50">
+          <Text className="font-subtitle text-sm text-zinc-50">
             Já tenho uma conta
           </Text>
         </TouchableOpacity>
