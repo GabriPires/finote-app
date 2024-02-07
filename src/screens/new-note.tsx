@@ -26,7 +26,7 @@ type NewNoteFormSchema = z.infer<typeof newNoteSchema>
 export function NewNoteScreen() {
   const insets = useSafeAreaInsets()
   const queryClient = useQueryClient()
-  const { navigate } = useNavigation()
+  const { reset } = useNavigation()
 
   const {
     control,
@@ -47,7 +47,13 @@ export function NewNoteScreen() {
         queryClient.invalidateQueries({
           queryKey: ['recent-notes'],
         })
-        navigate('note', { id: data?.[0].id! })
+        reset({
+          routes: [
+            { name: 'home' },
+            { name: 'note', params: { id: data?.[0].id! } },
+          ],
+          index: 0,
+        })
       },
     })
 

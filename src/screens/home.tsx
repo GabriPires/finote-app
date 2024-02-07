@@ -47,7 +47,9 @@ export function HomeScreen() {
           keyExtractor={(note) => note.id}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 12, paddingHorizontal: 16 }}
-          renderItem={({ item }) => <NoteListItem title={item.title} />}
+          renderItem={({ item }) => (
+            <NoteListItem id={item.id} title={item.title} />
+          )}
           ListEmptyComponent={() => (
             <Text className="text-center font-body text-zinc-50">
               Você ainda não tem nenhuma nota criada.

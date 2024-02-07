@@ -1,12 +1,10 @@
 import { Text, View } from 'react-native'
 import { tv } from 'tailwind-variants'
 
+import { Tables } from '../@types/supabase'
+
 interface EntryListItemProps {
-  item: {
-    title: string
-    value: number
-    type: 'income' | 'outcome'
-  }
+  item: Tables<'entries'>
 }
 
 const entryValue = tv({
@@ -23,7 +21,7 @@ export function EntryListItem({ item }: EntryListItemProps) {
   return (
     <View className="flex-row items-center rounded-md bg-zinc-800 p-2">
       <Text
-        className="font-body mr-2 leading-tight text-zinc-50"
+        className="mr-2 font-body leading-tight text-zinc-50"
         numberOfLines={1}
       >
         {item.title}
