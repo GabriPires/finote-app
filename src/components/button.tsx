@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 import {
   ActivityIndicator,
@@ -13,17 +14,21 @@ interface ButtonProps extends TouchableOpacityProps {
 export function Button({
   isLoading = false,
   children,
+  disabled,
   ...props
 }: PropsWithChildren<ButtonProps>) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      disabled={isLoading}
-      className="max-h-[56px] min-h-[56px] flex-1 flex-row items-center justify-center rounded-md bg-purple-500 p-3 dark:bg-purple-400"
+      disabled={isLoading || disabled}
+      className={clsx(
+        'max-h-[56px] min-h-[56px] flex-1 flex-row items-center justify-center rounded-md bg-purple-500 p-3 dark:bg-purple-400',
+        isLoading ? 'opacity-50' : 'opacity-100',
+      )}
       {...props}
     >
       {isLoading ? (
-        <ActivityIndicator color={colors.purple[500]} size={40} />
+        <ActivityIndicator color={colors.purple[300]} size={40} />
       ) : (
         children
       )}

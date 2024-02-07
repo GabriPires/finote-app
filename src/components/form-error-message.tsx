@@ -7,5 +7,5 @@ interface FormErrorMessageProps {
 export function FormErrorMessage({ message }: FormErrorMessageProps) {
   if (!message) return null
 
-  return <Text className="text-xs text-rose-500">{message}</Text>
+  return <Text className="mt-1 text-xs text-rose-500">{message}</Text>
 }

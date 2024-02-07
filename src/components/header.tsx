@@ -1,3 +1,4 @@
+import { supabase } from '@lib/supabase'
 import { SignOut } from 'phosphor-react-native'
 import { Image, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -7,6 +8,10 @@ import { IconButton } from './icon-button'
 export function Header() {
   const insets = useSafeAreaInsets()
   const paddingTop = insets.top + 16
+
+  async function handleSignOut() {
+    await supabase.auth.signOut()
+  }
 
   return (
     <View
@@ -23,7 +28,7 @@ export function Header() {
         />
       </View>
 
-      <IconButton icon={SignOut} />
+      <IconButton icon={SignOut} onPress={handleSignOut} />
     </View>
   )
 }

@@ -5,15 +5,18 @@ import { Input } from '@components/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { supabase } from '@lib/supabase'
 import { useNavigation } from '@react-navigation/native'
+import { Eye, EyeClosed } from 'phosphor-react-native'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
   KeyboardAvoidingView,
+  Platform,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import colors from 'tailwindcss/colors'
 import { z } from 'zod'
 
 const signInFormSchema = z.object({
@@ -26,6 +29,7 @@ const signInFormSchema = z.object({
 type SignInFormValues = z.infer<typeof signInFormSchema>
 
 export function SignInScreen() {
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets()
@@ -66,7 +70,11 @@ export function SignInScreen() {
         paddingTop,
       }}
     >
-      <KeyboardAvoidingView className="my-auto p-8">
+      <KeyboardAvoidingView
+        className="my-auto p-8"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : insets.bottom + 16}
+      >
         <Text className="font-subtitle mb-4 text-4xl text-zinc-50">
           Acessar
         </Text>
@@ -98,12 +106,26 @@ export function SignInScreen() {
             control={control}
             name="password"
             render={({ field: { value, onChange } }) => (
-              <Input
-                value={value}
-                secureTextEntry
-                autoCapitalize="none"
-                onChangeText={onChange}
-              />
+              <View className="relative">
+                <Input
+                  value={value}
+                  secureTextEntry={!showPassword}
+                  autoCapitalize="none"
+                  onChangeText={onChange}
+                  returnKeyType="send"
+                  onSubmitEditing={handleSubmit(handleSignIn)}
+                />
+                <TouchableOpacity
+                  className="absolute right-2 top-2.5"
+                  onPress={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? (
+                    <EyeClosed color={colors.zinc[50]} />
+                  ) : (
+                    <Eye color={colors.zinc[50]} />
+                  )}
+                </TouchableOpacity>
+              </View>
             )}
           />
           <FormErrorMessage message={errors.password?.message} />
