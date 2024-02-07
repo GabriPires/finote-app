@@ -4,8 +4,11 @@ import {
   Poppins_700Bold,
   useFonts,
 } from '@expo-google-fonts/poppins'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { StatusBar } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+
+import { queryClient } from '@/lib/react-query'
 
 import { Loading } from './src/components/loading'
 import { Routes } from './src/routes'
@@ -24,7 +27,13 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Routes /> : <Loading />}
+      {fontsLoaded ? (
+        <QueryClientProvider client={queryClient}>
+          <Routes />
+        </QueryClientProvider>
+      ) : (
+        <Loading />
+      )}
     </SafeAreaProvider>
   )
 }

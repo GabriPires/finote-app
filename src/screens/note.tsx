@@ -1,7 +1,8 @@
-import { EntryListItem } from '@components/entry-list-item'
-import { Header } from '@components/header'
 import { useRoute } from '@react-navigation/native'
 import { FlatList, Text, View } from 'react-native'
+
+import { EntryListItem } from '@/components/entry-list-item'
+import { Header } from '@/components/header'
 
 interface NoteScreenParamsProps {
   id: string
@@ -39,7 +40,7 @@ export function NoteScreen() {
           Nota exemplo
         </Text>
 
-        <Text className="font-body mt-2 text-zinc-300" numberOfLines={6}>
+        <Text className="mt-2 font-body text-zinc-300" numberOfLines={6}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, quia
           nesciunt, eveniet similique laboriosam esse quibusdam laborum velit
           iure voluptate neque ipsum dolorem inventore fuga consequuntur?

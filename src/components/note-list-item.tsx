@@ -17,7 +17,7 @@ export function NoteListItem({ title }: NoteListItemProps) {
       onPress={() => navigate('note', { id: '123' })}
     >
       <Note size={24} color={colors.zinc[50]} />
-      <Text className="font-body ml-2 text-zinc-50">{title}</Text>
+      <Text className="ml-2 font-body text-zinc-50">{title}</Text>
     </TouchableOpacity>
   )
 }

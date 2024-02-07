@@ -7,7 +7,7 @@ export function Input({ className, ...props }: InputProps) {
   return (
     <TextInput
       className={twMerge(
-        'rounded bg-zinc-800 px-2 py-3 font-sans text-zinc-50',
+        'rounded bg-zinc-800 px-2 py-3 font-body text-zinc-50',
         className,
       )}
       {...props}

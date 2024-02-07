@@ -6,6 +6,7 @@ export declare global {
       'sign-up': undefined
       home: undefined
       notes: undefined
+      'new-note': undefined
       note: {
         id: string
       }

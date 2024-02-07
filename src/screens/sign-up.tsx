@@ -1,9 +1,4 @@
-import { Button } from '@components/button'
-import { FormControl } from '@components/form-control'
-import { FormErrorMessage } from '@components/form-error-message'
-import { Input } from '@components/input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { supabase } from '@lib/supabase'
 import { useNavigation } from '@react-navigation/native'
 import { Eye, EyeClosed } from 'phosphor-react-native'
 import { useState } from 'react'
@@ -18,6 +13,12 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import colors from 'tailwindcss/colors'
 import { z } from 'zod'
+
+import { Button } from '@/components/button'
+import { FormControl } from '@/components/form-control'
+import { FormErrorMessage } from '@/components/form-error-message'
+import { Input } from '@/components/input'
+import { supabase } from '@/lib/supabase'
 
 const signUpFormSchema = z.object({
   email: z.string().email({ message: 'Digite um e-mail válido' }),
@@ -83,7 +84,7 @@ export function SignUpScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : insets.bottom + 16}
       >
-        <Text className="font-subtitle mb-4 text-4xl text-zinc-50">
+        <Text className="mb-4 font-subtitle text-4xl text-zinc-50">
           Criar uma conta
         </Text>
 
