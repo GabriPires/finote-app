@@ -3,7 +3,7 @@ import colors from 'tailwindcss/colors'
 
 export function Loading() {
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="flex-1 items-center justify-center bg-zinc-900">
       <ActivityIndicator color={colors.purple[500]} size={40} />
     </View>
   )

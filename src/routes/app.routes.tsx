@@ -1,20 +1,40 @@
+import { Loading } from '@components/loading'
 import { supabase } from '@lib/supabase'
+import { useNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { HomeScreen } from '@screens/Home'
 import { NoteScreen } from '@screens/Note'
 import { NotesScreen } from '@screens/Notes'
 import { SignInScreen } from '@screens/sign-in'
 import { SignUpScreen } from '@screens/sign-up'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AppRoutes() {
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      console.log(user)
-    })
-  }, [])
+  const { reset } = useNavigation()
+
+  useLayoutEffect(() => {
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (_, session) => {
+        if (!session) {
+          reset({
+            index: 0,
+            routes: [{ name: 'sign-in' }],
+          })
+        } else {
+          reset({
+            index: 0,
+            routes: [{ name: 'home' }],
+          })
+        }
+      },
+    )
+
+    return () => {
+      subscription.subscription.unsubscribe()
+    }
+  }, [reset])
 
   return (
     <Navigator
@@ -22,6 +42,7 @@ export function AppRoutes() {
         headerShown: false,
       }}
     >
+      <Screen name="loading" component={Loading} />
       <Screen name="sign-in" component={SignInScreen} />
       <Screen name="sign-up" component={SignUpScreen} />
       <Screen name="home" component={HomeScreen} />

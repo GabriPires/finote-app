@@ -26,7 +26,6 @@ const signUpFormSchema = z.object({
 type SignUpFormValues = z.infer<typeof signUpFormSchema>
 
 export function SignUpScreen() {
-  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const { navigate } = useNavigation()
   const insets = useSafeAreaInsets()
@@ -36,7 +35,7 @@ export function SignUpScreen() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -46,26 +45,22 @@ export function SignUpScreen() {
   })
 
   async function handleSignUp({ email, password }: SignUpFormValues) {
-    try {
-      setIsLoading(true)
-
-      const { error } = await supabase.auth.signUp({
+    await supabase.auth
+      .signUp({
         email,
         password,
       })
-
-      if (error) {
+      .then(async () => {
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        })
+      })
+      .catch(() => {
         setError(
           'Ocorreu um erro ao se registrar, por favor tente novamente mais tarde.',
         )
-      }
-    } catch (error) {
-      setError(
-        'Ocorreu um erro ao se registrar, por favor tente novamente mais tarde.',
-      )
-    } finally {
-      setIsLoading(false)
-    }
+      })
   }
 
   function handleSignIn() {
@@ -120,7 +115,11 @@ export function SignUpScreen() {
           <FormErrorMessage message={errors.password?.message} />
         </FormControl>
 
-        <Button className="mt-4" onPress={handleSubmit(handleSignUp)}>
+        <Button
+          className="mt-4"
+          isLoading={isSubmitting}
+          onPress={handleSubmit(handleSignUp)}
+        >
           <Text className="font-subtitle text-lg text-zinc-50">
             Criar conta
           </Text>

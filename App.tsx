@@ -7,7 +7,7 @@ import {
 import { StatusBar } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import { Loading } from './src/components/Loading'
+import { Loading } from './src/components/loading'
 import { Routes } from './src/routes'
 
 export default function App() {

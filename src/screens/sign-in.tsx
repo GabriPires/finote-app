@@ -35,7 +35,7 @@ export function SignInScreen() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
@@ -109,7 +109,11 @@ export function SignInScreen() {
           <FormErrorMessage message={errors.password?.message} />
         </FormControl>
 
-        <Button className="mt-4" onPress={handleSubmit(handleSignIn)}>
+        <Button
+          className="mt-4"
+          isLoading={isSubmitting}
+          onPress={handleSubmit(handleSignIn)}
+        >
           <Text className="font-subtitle text-lg text-zinc-50">Entrar</Text>
         </Button>
 
