@@ -61,10 +61,7 @@ export function NoteScreen() {
     [entries],
   )
 
-  const {
-    mutateAsync: deleteNoteEntryFn,
-    isPending: isLoadingDeleteNoteEntry,
-  } = useMutation({
+  const { mutateAsync: deleteNoteEntryFn } = useMutation({
     mutationFn: deleteNoteEntry,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['note-entries', id] })
