@@ -1,7 +1,7 @@
 import BottomSheet from '@gorhom/bottom-sheet'
 import { useRoute } from '@react-navigation/native'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Note, Plus, Trash } from 'phosphor-react-native'
+import { Plus, Trash } from 'phosphor-react-native'
 import { useMemo, useRef } from 'react'
 import {
   ActivityIndicator,
