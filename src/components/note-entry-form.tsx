@@ -6,6 +6,7 @@ import { Text, View } from 'react-native'
 import { z } from 'zod'
 
 import { createNewNoteEntry } from '@/api/create-new-note-entry'
+import { inputCurrencyMask } from '@/utils/input-currency-mask'
 
 import { BottomSheetInput } from './bottom-sheet-input'
 import { Button } from './button'
@@ -18,7 +19,7 @@ const newEntryFormSchema = z.object({
   value: z
     .string()
     .min(1, { message: 'Valor é obrigatório' })
-    .transform((value) => value.replace(',', '.')),
+    .transform((value) => value.replaceAll('.', '').replace(',', '.')),
   type: z.enum(['income', 'outcome']),
 })
 
@@ -96,7 +97,9 @@ export function NoteEntryForm({ noteId, onAddEntry }: NoteEntryFormProps) {
             <BottomSheetInput
               value={value}
               inputMode="decimal"
-              onChangeText={onChange}
+              onChangeText={(value) => {
+                onChange(inputCurrencyMask(value))
+              }}
             />
             <FormErrorMessage message={errors.value?.message} />
           </FormControl>
