@@ -22,7 +22,7 @@ export function Button({
       activeOpacity={0.7}
       disabled={isLoading || disabled}
       className={clsx(
-        'max-h-[56px] min-h-[56px] flex-1 flex-row items-center justify-center rounded-md bg-purple-500 p-3 dark:bg-purple-400',
+        'max-h-[56px] min-h-[56px] flex-1 flex-row items-center justify-center rounded-md bg-violet-500 p-3 dark:bg-violet-400',
         isLoading ? 'opacity-50' : 'opacity-100',
       )}
       {...props}

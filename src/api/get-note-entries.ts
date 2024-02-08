@@ -8,7 +8,7 @@ export async function getNoteEntries({ noteId }: GetNoteEntriesParams) {
   const { data } = await supabase
     .from('entries')
     .select('*')
-    .eq('note_id', noteId)
+    .eq('notes_id', noteId)
 
   return data
 }

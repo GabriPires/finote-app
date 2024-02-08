@@ -14,7 +14,7 @@ export function FormControl({
 }: PropsWithChildren<FormControlProps>) {
   return (
     <View className={twMerge('flex-col', className)}>
-      {label && <Text className="font-body mb-1 text-zinc-50">{label}</Text>}
+      {label && <Text className="mb-1 font-body text-zinc-50">{label}</Text>}
       {children}
     </View>
   )

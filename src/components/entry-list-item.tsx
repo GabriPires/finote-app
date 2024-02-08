@@ -17,6 +17,8 @@ const entryValue = tv({
   },
 })
 
+type EntryValueVariantType = keyof (typeof entryValue)['variants']['type']
+
 export function EntryListItem({ item }: EntryListItemProps) {
   return (
     <View className="flex-row items-center rounded-md bg-zinc-800 p-2">
@@ -26,7 +28,9 @@ export function EntryListItem({ item }: EntryListItemProps) {
       >
         {item.title}
       </Text>
-      <Text className={entryValue({ type: item.type })}>
+      <Text
+        className={entryValue({ type: item.type as EntryValueVariantType })}
+      >
         {new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL',
