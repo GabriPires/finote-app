@@ -1,12 +1,14 @@
 import BottomSheet from '@gorhom/bottom-sheet'
 import { useRoute } from '@react-navigation/native'
-import { useQuery } from '@tanstack/react-query'
-import { Plus } from 'phosphor-react-native'
-import { useMemo, useRef } from 'react'
-import { ActivityIndicator, FlatList, Text, View } from 'react-native'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { Note, Plus, Trash } from 'phosphor-react-native'
+import { useMemo, useRef, useState } from 'react'
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SwipeListView } from 'react-native-swipe-list-view'
 import colors from 'tailwindcss/colors'
 
+import { deleteNoteEntry } from '@/api/delete-note-netry'
 import { getNote } from '@/api/get-note'
 import { getNoteEntries } from '@/api/get-note-entries'
 import { Button } from '@/components/button'
@@ -21,6 +23,8 @@ interface NoteScreenParamsProps {
 
 export function NoteScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null)
+
+  const queryClient = useQueryClient()
 
   const insets = useSafeAreaInsets()
   const route = useRoute()
@@ -46,6 +50,20 @@ export function NoteScreen() {
     [entries],
   )
 
+  const {
+    mutateAsync: deleteNoteEntryFn,
+    isPending: isLoadingDeleteNoteEntry,
+  } = useMutation({
+    mutationFn: deleteNoteEntry,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['note-entries', id] })
+    },
+  })
+
+  async function handleDeleteEntry(id: string) {
+    await deleteNoteEntryFn({ entryId: id })
+  }
+
   if (!note || isLoadingNote) {
     return (
       <View className="flex-1 bg-zinc-900">
@@ -64,6 +82,11 @@ export function NoteScreen() {
           className="truncate font-subtitle text-2xl text-zinc-50"
           numberOfLines={3}
         >
+          {isLoadingDeleteNoteEntry ? (
+            <ActivityIndicator className="mr-1" />
+          ) : (
+            <Note color={colors.zinc[50]} size={24} />
+          )}
           {note.title}
         </Text>
 
@@ -73,7 +96,7 @@ export function NoteScreen() {
 
         {isLoadingEntries && <ActivityIndicator className="mt-4" />}
 
-        <FlatList
+        <SwipeListView
           data={entries}
           className="mt-2"
           ListEmptyComponent={() => (
@@ -81,9 +104,22 @@ export function NoteScreen() {
               Nenhuma anotação encontrada, comece criando uma
             </Text>
           )}
+          disableRightSwipe
+          showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <View className="h-4" />}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => <EntryListItem item={item} />}
+          renderHiddenItem={({ item }) => (
+            <View className="flex-row items-center justify-end p-2">
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={async () => await handleDeleteEntry(item.id)}
+              >
+                <Trash color={colors.rose[500]} />
+              </TouchableOpacity>
+            </View>
+          )}
+          rightOpenValue={-50}
         />
 
         <Text className="mb-2 pt-2 text-right font-subtitle text-lg text-zinc-50">

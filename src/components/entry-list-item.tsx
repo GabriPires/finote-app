@@ -1,11 +1,8 @@
+import clsx from 'clsx'
 import { Text, View } from 'react-native'
 import { tv } from 'tailwind-variants'
 
 import { Tables } from '../@types/supabase'
-
-interface EntryListItemProps {
-  item: Tables<'entries'>
-}
 
 const entryValue = tv({
   base: 'ml-auto font-body leading-tight',
@@ -19,9 +16,19 @@ const entryValue = tv({
 
 type EntryValueVariantType = keyof (typeof entryValue)['variants']['type']
 
-export function EntryListItem({ item }: EntryListItemProps) {
+interface EntryListItemProps {
+  item: Tables<'entries'>
+  loading?: boolean
+}
+
+export function EntryListItem({ item, loading = false }: EntryListItemProps) {
   return (
-    <View className="flex-row items-center rounded-md bg-zinc-800 p-2">
+    <View
+      className={clsx(
+        'flex-row items-center rounded-md bg-zinc-800 p-3',
+        loading ? 'opacity-30' : 'opacity-100',
+      )}
+    >
       <Text
         className="mr-2 font-body leading-tight text-zinc-50"
         numberOfLines={1}
