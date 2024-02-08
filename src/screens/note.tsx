@@ -2,8 +2,14 @@ import BottomSheet from '@gorhom/bottom-sheet'
 import { useRoute } from '@react-navigation/native'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Note, Plus, Trash } from 'phosphor-react-native'
-import { useMemo, useRef, useState } from 'react'
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
+import { useMemo, useRef } from 'react'
+import {
+  ActivityIndicator,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import colors from 'tailwindcss/colors'
@@ -36,7 +42,12 @@ export function NoteScreen() {
     enabled: !!id,
   })
 
-  const { data: entries, isLoading: isLoadingEntries } = useQuery({
+  const {
+    data: entries,
+    isLoading: isLoadingEntries,
+    refetch: refetchEntries,
+    isRefetching: isRefetchingEntries,
+  } = useQuery({
     queryKey: ['note-entries', id],
     queryFn: async () => getNoteEntries({ noteId: id }),
     enabled: !!id,
@@ -82,11 +93,6 @@ export function NoteScreen() {
           className="truncate font-subtitle text-2xl text-zinc-50"
           numberOfLines={3}
         >
-          {isLoadingDeleteNoteEntry ? (
-            <ActivityIndicator className="mr-1" />
-          ) : (
-            <Note color={colors.zinc[50]} size={24} />
-          )}
           {note.title}
         </Text>
 
@@ -99,6 +105,13 @@ export function NoteScreen() {
         <SwipeListView
           data={entries}
           className="mt-2"
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetchingEntries}
+              onRefresh={refetchEntries}
+              tintColor={colors.violet[400]}
+            />
+          }
           ListEmptyComponent={() => (
             <Text className="text-zinc-500">
               Nenhuma anotação encontrada, comece criando uma
